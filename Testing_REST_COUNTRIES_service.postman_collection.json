@@ -1,0 +1,1682 @@
+{
+	"info": {
+		"_postman_id": "23d23043-5473-4936-8633-574a29ec1822",
+		"name": "Testing_REST_COUNTRIES_service",
+		"description": "Get information about countries via a RESTful API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Testing NAME endpoint",
+			"item": [
+				{
+					"name": "NAME endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91cb09ef-9566-45be-a06b-9692b46eb25d",
+								"exec": [
+									"pm.test(\"Ceck if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Hungary \", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the region field in the responseis Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response is Eastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/hun",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"hun"
+							]
+						},
+						"description": "Search by country name. It can be the native name or partial name"
+					},
+					"response": []
+				},
+				{
+					"name": "NAME endpoint NEG no parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91cb09ef-9566-45be-a06b-9692b46eb25d",
+								"exec": [
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								""
+							]
+						},
+						"description": "Search by country name. It can be the native name or partial name. No parameter was added."
+					},
+					"response": []
+				},
+				{
+					"name": "NAME endpoint NEG invalid parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91cb09ef-9566-45be-a06b-9692b46eb25d",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/hux",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"hux"
+							]
+						},
+						"description": "Search by country name. It can be the native name or partial name. Invalid parameter was added."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by country name. It can be the native name or partial name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8c07136a-98a6-4703-ac65-12960fa5e75e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6abac7e8-8f8b-462c-b5ca-95a333c676b3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing FULL NAME endpoint",
+			"item": [
+				{
+					"name": "FULL NAME endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "494d51b5-d254-4c44-97be-bb12cd79bb13",
+								"exec": [
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is HUngary\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response Eastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/hungary?fullText=true",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"hungary"
+							],
+							"query": [
+								{
+									"key": "fullText",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Search by country full name"
+					},
+					"response": []
+				},
+				{
+					"name": "FULL NAME endpoint FullText param is False",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fbf9f438-4888-499f-8c36-119bde775675",
+								"exec": [
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Hungary\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response isEastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/hungary?fullText=false",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"hungary"
+							],
+							"query": [
+								{
+									"key": "fullText",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Search by country full name. The FullText parameter is False but the full name was set."
+					},
+					"response": []
+				},
+				{
+					"name": "FULL NAME endpoint  NEG no parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e11838a-1198-45a6-bfa7-5cfb42657a99",
+								"exec": [
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/?fullText=true",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								""
+							],
+							"query": [
+								{
+									"key": "fullText",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Search by country full name. No parameter was set."
+					},
+					"response": []
+				},
+				{
+					"name": "FULL NAME endpoint  NEG  partial name and FullText was set to True",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d340a84-a316-441c-9b38-6aa53e1f4036",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/h?fullText=true",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"h"
+							],
+							"query": [
+								{
+									"key": "fullText",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Search by country full name. Only partial name was given and FullText was set to True"
+					},
+					"response": []
+				},
+				{
+					"name": "FULL NEM endpoint NEG invalid name was given",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e5680df7-b724-444a-a142-ba00d549f17d",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/name/huxgary?fullText=true",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"name",
+								"huxgary"
+							],
+							"query": [
+								{
+									"key": "fullText",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Search by country full name. Invalid name was given."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by country full name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "12a37b95-d802-42c7-9649-602c5e1004bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d754b0cb-4e07-4890-a83e-ef834d555e0b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing CODE endpoint",
+			"item": [
+				{
+					"name": "CODE endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3746519-4938-4194-baec-3a9d3936aaf4",
+								"exec": [
+									"",
+									"pm.test(\"Check if Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response is Eastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.subregion).to.eql(\"Eastern Europe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha/hu",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha",
+								"hu"
+							]
+						},
+						"description": "Search by ISO 3166-1 2-letter or 3-letter country code"
+					},
+					"response": []
+				},
+				{
+					"name": "CODE endpoint NEG  invalid code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1cd9092e-3f7c-4da3-bfcf-86659f5e2d56",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha/hux",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha",
+								"hux"
+							]
+						},
+						"description": "Search by ISO 3166-1 2-letter or 3-letter country code. Invalid code was set."
+					},
+					"response": []
+				},
+				{
+					"name": "CODE endpoint NEG no code was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29290888-08d1-4946-8ee5-a91feb68c88d",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Check if Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Bad Request\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha",
+								""
+							]
+						},
+						"description": "Search by ISO 3166-1 2-letter or 3-letter country code. Invalid code was set."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by ISO 3166-1 2-letter or 3-letter country code",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c6e197da-3a2c-40aa-8507-4232f492ca5d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "de5ee4b2-9b60-4fa8-8a0e-a3bd7352b78e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing LIST OF CODES endpoint",
+			"item": [
+				{
+					"name": "LIST OF CODES endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fde138e7-4fbe-4b31-a23a-7d5bacdf7f6b",
+								"exec": [
+									"pm.test(\"Check if Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response (first node) is Columbia\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Colombia\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response (second node) is Norway\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1].name).to.eql(\"Norway\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response (thirs node) is Estonia\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[2].name).to.eql(\"Estonia\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha?codes=col;no;ee",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha"
+							],
+							"query": [
+								{
+									"key": "codes",
+									"value": "col;no;ee"
+								}
+							]
+						},
+						"description": "Search by list of ISO 3166-1 2-letter or 3-letter country codes"
+					},
+					"response": []
+				},
+				{
+					"name": "LIST OF CODES endpoint NEG invalid code was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "40ee9e4d-ce9b-4c4f-b687-046f44b28242",
+								"exec": [
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response (first node) is Columbia\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Colombia\");",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the name field in the response (second node) is Norway\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1].name).to.eql(\"Norway\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha?codes=col;no;hux",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha"
+							],
+							"query": [
+								{
+									"key": "codes",
+									"value": "col;no;hux"
+								}
+							]
+						},
+						"description": "Search by list of ISO 3166-1 2-letter or 3-letter country codes. Invalid code was set."
+					},
+					"response": []
+				},
+				{
+					"name": "LIST OF CODES endpoint NEG no code was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "613c79e6-7bc4-4479-8532-52c0f6ae0531",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Check if Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Bad Request\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/alpha?codes=",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"alpha"
+							],
+							"query": [
+								{
+									"key": "codes",
+									"value": ""
+								}
+							]
+						},
+						"description": "Search by list of ISO 3166-1 2-letter or 3-letter country codes. No code was set."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by list of ISO 3166-1 2-letter or 3-letter country codes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3707dab7-781d-4198-abfd-71435132b064",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "721a52c9-2f65-478f-87f6-cb9423e87898",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing CURRENCY endpoint",
+			"item": [
+				{
+					"name": "CURRENCY endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "63931fec-bbdf-4fe4-ae3b-4ced34031af0",
+								"exec": [
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the currency.name field in the response is Euro \", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].currencies[0].name).to.eql(\"Euro\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/currency/huf",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"currency",
+								"huf"
+							]
+						},
+						"description": "Search by ISO 4217 currency code"
+					},
+					"response": []
+				},
+				{
+					"name": "CURRENCY endpoint NEG invalid currency was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "868d96fc-cdcf-40f7-b3ee-2877c28c13a4",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/currency/hux",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"currency",
+								"hux"
+							]
+						},
+						"description": "Search by ISO 4217 currency code. Invali currency was set."
+					},
+					"response": []
+				},
+				{
+					"name": "CURRENCY endpoint NEG no currency was given",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf5b405b-518f-4718-b1c1-c36119ae57a8",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/currency/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"currency",
+								""
+							]
+						},
+						"description": "Search by ISO 4217 currency code. No currency was given."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by ISO 4217 currency code",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3997e7ed-0e57-4006-9387-59d00fb4950c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "90c871ac-674f-4fa0-9804-70bb89e0a69d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing LANGUAGE endpoint",
+			"item": [
+				{
+					"name": "LANGUAGE endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11827764-ea11-46a1-a089-24ac22732912",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Hungary\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response Eastrn Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/lang/hu",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"lang",
+								"hu"
+							]
+						},
+						"description": "Search by ISO 639-1 language code."
+					},
+					"response": []
+				},
+				{
+					"name": "LANGUAGE endpoint NEG invalid language was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8dfe9605-42c5-4d3e-a320-868bfba75f74",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/lang/huk",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"lang",
+								"huk"
+							]
+						},
+						"description": "Search by ISO 639-1 language code. Invalid language was set"
+					},
+					"response": []
+				},
+				{
+					"name": "LANGUAGE endpoint NEG no language was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73abb97b-9daf-457f-8668-8ba869b21aad",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/lang/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"lang",
+								""
+							]
+						},
+						"description": "Search by ISO 639-1 language code. No language was set."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by ISO 639-1 language code.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6feca022-8d2d-437f-bdf8-a673ba55bbd0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b973ca3-da0d-4bc7-b71f-5ffbd9c7a911",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing CAPITAL CITY endpoint",
+			"item": [
+				{
+					"name": "CAPITAL CITY endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f59a631-46ae-4cce-a236-bc52b8dcc5a0",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Hungary\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response is Eastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/capital/budapest",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"capital",
+								"budapest"
+							]
+						},
+						"description": "Search by capital city"
+					},
+					"response": []
+				},
+				{
+					"name": "CAPITAL CITY endpoint NEG invalid capital city was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f59a631-46ae-4cce-a236-bc52b8dcc5a0",
+								"exec": [
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/capital/budakest",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"capital",
+								"budakest"
+							]
+						},
+						"description": "Search by capital city. Invalid capital city was set."
+					},
+					"response": []
+				},
+				{
+					"name": "CAPITAL CITY endpoint NEG no capital city was set ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f59a631-46ae-4cce-a236-bc52b8dcc5a0",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/capital/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"capital",
+								""
+							]
+						},
+						"description": "Search by capital city. no capital city was set."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by capital city",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "670a495c-b679-4d66-a77b-5d97ff6fee72",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3bfb80ee-f6b4-453a-87b8-4ed6fee294ad",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testing CALLING CODE endpoint",
+			"item": [
+				{
+					"name": "CALLING CODE endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9be7462a-de4f-4400-b9eb-fd9546a761c1",
+								"exec": [
+									"pm.test(\"Check the Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the name field in the response is Hungary\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Hungary\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the alpha2Code field in the response is HU\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].alpha2Code).to.eql(\"HU\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the capital field in the response is Budapest\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].capital).to.eql(\"Budapest\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the region field in the response is Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].region).to.eql(\"Europe\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the subregion field in the response is Eastern Europe\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].subregion).to.eql(\"Eastern Europe\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/callingcode/36",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"callingcode",
+								"36"
+							]
+						},
+						"description": "Search by calling code"
+					},
+					"response": []
+				},
+				{
+					"name": "CALLING CODE endpoint NEG invalid calling code was set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9be7462a-de4f-4400-b9eb-fd9546a761c1",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check if the value of the message code is Not Found\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Not Found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/callingcode/366",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"callingcode",
+								"366"
+							]
+						},
+						"description": "Search by calling code. Invalid calling code was set."
+					},
+					"response": []
+				},
+				{
+					"name": "CALLING CODE endpoint NEG no calling code was set ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9be7462a-de4f-4400-b9eb-fd9546a761c1",
+								"exec": [
+									"",
+									"pm.test(\"Check if the Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://restcountries.eu/rest/v2/callingcode/",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"eu"
+							],
+							"path": [
+								"rest",
+								"v2",
+								"callingcode",
+								""
+							]
+						},
+						"description": "Search by calling code. No calling code was set."
+					},
+					"response": []
+				}
+			],
+			"description": "Search by calling code",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e8156365-f836-40f1-a05e-bf901c540c8c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "687cf562-71f9-4ea7-936a-0bd73aefe535",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e43b4ec9-72e2-4d1b-93bf-a3f6daa4a5f7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e26d4178-ae94-4c69-9e3c-87f22f70d82b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
